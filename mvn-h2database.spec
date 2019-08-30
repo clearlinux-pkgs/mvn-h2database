@@ -4,7 +4,7 @@
 #
 Name     : mvn-h2database
 Version  : 1.4.195
-Release  : 1
+Release  : 2
 URL      : https://github.com/h2database/h2database/archive/version-1.4.195.tar.gz
 Source0  : https://github.com/h2database/h2database/archive/version-1.4.195.tar.gz
 Source1  : https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.195/h2-1.4.195.jar
