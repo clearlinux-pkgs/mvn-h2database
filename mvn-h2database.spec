@@ -4,15 +4,20 @@
 #
 Name     : mvn-h2database
 Version  : 1.4.195
-Release  : 2
+Release  : 3
 URL      : https://github.com/h2database/h2database/archive/version-1.4.195.tar.gz
 Source0  : https://github.com/h2database/h2database/archive/version-1.4.195.tar.gz
 Source1  : https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.195/h2-1.4.195.jar
 Source2  : https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.195/h2-1.4.195.pom
+Source3  : https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.196/h2-1.4.196.jar
+Source4  : https://repo.maven.apache.org/maven2/com/h2database/h2/1.4.196/h2-1.4.196.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : EPL-1.0 MPL-2.0-no-copyleft-exception
+License  : EPL-1.0 MIT MPL-2.0-no-copyleft-exception
 Requires: mvn-h2database-data = %{version}-%{release}
+Requires: mvn-h2database-license = %{version}-%{release}
+BuildRequires : apache-maven
+BuildRequires : buildreq-mvn
 
 %description
 # Welcome to H2, the Java SQL database. [![Build Status](https://travis-ci.org/h2database/h2database.svg?branch=master)](https://travis-ci.org/h2database/h2database)
@@ -25,16 +30,34 @@ Group: Data
 data components for the mvn-h2database package.
 
 
+%package license
+Summary: license components for the mvn-h2database package.
+Group: Default
+
+%description license
+license components for the mvn-h2database package.
+
+
 %prep
+%setup -q -n h2database-version-1.4.195
 
 %build
 
 %install
+mkdir -p %{buildroot}/usr/share/package-licenses/mvn-h2database
+cp h2/service/serviceWrapperLicense.txt %{buildroot}/usr/share/package-licenses/mvn-h2database/h2_service_serviceWrapperLicense.txt
+cp h2/src/docsrc/html/license.html %{buildroot}/usr/share/package-licenses/mvn-h2database/h2_src_docsrc_html_license.html
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/h2database/h2/1.4.195
 cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/com/h2database/h2/1.4.195/h2-1.4.195.jar
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/h2database/h2/1.4.195
 cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/com/h2database/h2/1.4.195/h2-1.4.195.pom
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/h2database/h2/1.4.196
+cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/com/h2database/h2/1.4.196/h2-1.4.196.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/h2database/h2/1.4.196
+cp %{SOURCE4} %{buildroot}/usr/share/java/.m2/repository/com/h2database/h2/1.4.196/h2-1.4.196.pom
 
 
 %files
@@ -44,3 +67,10 @@ cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/com/h2database/h2/1.4.1
 %defattr(-,root,root,-)
 /usr/share/java/.m2/repository/com/h2database/h2/1.4.195/h2-1.4.195.jar
 /usr/share/java/.m2/repository/com/h2database/h2/1.4.195/h2-1.4.195.pom
+/usr/share/java/.m2/repository/com/h2database/h2/1.4.196/h2-1.4.196.jar
+/usr/share/java/.m2/repository/com/h2database/h2/1.4.196/h2-1.4.196.pom
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mvn-h2database/h2_service_serviceWrapperLicense.txt
+/usr/share/package-licenses/mvn-h2database/h2_src_docsrc_html_license.html
